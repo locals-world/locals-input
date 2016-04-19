@@ -1,0 +1,111 @@
+<!--
+@license
+Copyright (c) 2016 A-labs. All rights reserved.
+/////////////////
+LOCALS
+/////////////////
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../locals-style/locals-style.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../paper-input/paper-input-container.html">
+<link rel="import" href="../paper-input/paper-input-behavior.html">
+
+
+<!--
+Based on the paper-input element, this element uses the same structure but applies Locals-style to it.
+
+Example:
+
+    <locals-input></locals-input>
+
+Example:
+
+    <locals-input>
+      <h2>Hello locals-input</h2>
+    </locals-input>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="locals-input">
+  <template>
+    <style>
+     :host {
+        display: block;
+        box-sizing: border-box;
+      }
+
+
+      paper-input-container input, paper-input-container label {
+        @apply(--opensans-light);
+      }
+
+    </style>
+
+    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
+
+      <label hidden$="[[!label]]">[[label]]</label>
+      <input is="iron-input" id="input"
+        disabled$="[[disabled]]"
+        placeholder$="[[placeholder]]"
+        autofocus$="[[autofocus]]"
+        title$="[[title]]"
+        bind-value="{{value}}"
+        invalid="{{invalid}}"
+        prevent-invalid-input="[[preventInvalidInput]]"
+        allowed-pattern="[[allowedPattern]]"
+        on-change="_onChange"        >
+
+    </paper-input-container>
+  
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'locals-input',
+
+      behaviors: [
+        Polymer.IronFormElementBehavior,
+        Polymer.PaperInputBehavior
+      ],
+
+      properties: {
+
+      },
+
+
+      ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+      },
+
+      detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+      }
+
+
+
+    });
+  </script>
+</dom-module>
