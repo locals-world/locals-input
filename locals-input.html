@@ -9,10 +9,7 @@ LOCALS
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../locals-style/locals-style.html">
-<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
-<link rel="import" href="../paper-input/paper-input-container.html">
-<link rel="import" href="../paper-input/paper-input-behavior.html">
-
+<link rel="import" href="../iron-input/iron-input.html">
 
 <!--
 Based on the paper-input element, this element uses the same structure but applies Locals-style to it.
@@ -37,30 +34,17 @@ Example:
      :host {
         display: block;
         box-sizing: border-box;
+        @apply(--layout-vertical);
       }
 
-
-      paper-input-container input, paper-input-container label {
-        @apply(--opensans-light);
-      }
 
     </style>
 
-    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
 
-      <label hidden$="[[!label]]">[[label]]</label>
-      <input is="iron-input" id="input"
-        disabled$="[[disabled]]"
-        placeholder$="[[placeholder]]"
-        autofocus$="[[autofocus]]"
-        title$="[[title]]"
-        bind-value="{{value}}"
-        invalid="{{invalid}}"
-        prevent-invalid-input="[[preventInvalidInput]]"
-        allowed-pattern="[[allowedPattern]]"
-        on-change="_onChange"        >
+      <label>[[label]]</label>
+      <input is="iron-input" bind-value="{{value}}">
 
-    </paper-input-container>
+
   
 
   </template>
@@ -70,8 +54,7 @@ Example:
       is: 'locals-input',
 
       behaviors: [
-        Polymer.IronFormElementBehavior,
-        Polymer.PaperInputBehavior
+
       ],
 
       properties: {
