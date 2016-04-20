@@ -33,34 +33,29 @@ Example:
     <style>
      :host {
         display: block;
+        margin: 20px 0px 20px 0px;
         --input-color: darkgrey;
-/*        background-color: rgba(255,0,255,0.025);*/
-
       }
 
       .total {
         position: relative;
         box-sizing: border-box;
         @apply(--layout-vertical);
-        @apply(--opensans-light);
+        @apply(--opensans-reg);
         z-index: 0;
       }
-
-
-
-
 
       .label {
         font-size: 12px;
         z-index: -1;
         box-sizing: border-box;
-        padding: 5px;
+        padding: 5px 5px 5px 0px;
+        color:var(--locals-darkgrey);
       }
 
       input {
         @apply(--opensans-reg);
         color:var(--locals-darkgrey);
-
         outline-width: 0;
         outline: none;
         -moz-user-select: none;
@@ -72,81 +67,51 @@ Example:
         box-sizing: border-box;
         padding: 12px;
         font-size: 20px;
-        background-color: rgba(0,0,0,0.025);
-
+        background-color: rgba(0,0,0,0.05);
       }
-
-
 
       .outfocus input {
         box-sizing: border-box;
         border: none;
-        background-color: rgba(0,0,0,0.025);
+        background-color: rgba(0,0,0,0.05);
+        @apply(--opensans-reg);
       }
 
       .outfocus label {
-        color: black;
-        @apply(--opensans-light);
-
+        color:var(--locals-darkgrey);
         -webkit-transition: -webkit-transform 0.15s;
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
-        -webkit-transform: translateY(0%) scale(1);
-        transform: translateY(0%) scale(1);
+        -webkit-transform: translateY(0%) translateX(0px) scale(1);
+        transform: translateY(0%) translateX(0px) scale(1);
       }
-
-
-
 
       .infocus input {
         box-sizing: border-box;
         border-bottom: 2px solid var(--input-color);
         transition: background-color 0.15s;
         background-color: rgba(0,0,0,0);
+        @apply(--opensans-semibold);
       }
 
       .infocus label {
         color: var(--input-color);
         @apply(--opensans-semibold);
-
         -webkit-transition: -webkit-transform 0.15s;
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
-        -webkit-transform: translateY(0%) scale(1.15);
-        transform: translateY(0%) scale(1.15);
+        -webkit-transform: translateY(0%) translateX(5px) scale(1.15);
+        transform: translateY(0%) translateX(5px) scale(1.15);
+        padding-left: 5px;
       }
-
-
-
-
-
-
-/*      .normallabel {
-        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
-        transition: transform 0.25s, width 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
-        -webkit-transform: translateY(100%) scale(1);
-        transform: translateY(100%) scale(1);
-      }
-
-      .transformlabel {
-
-        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
-        transition: transform 0.25s, width 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
-        -webkit-transform: translateY(0%) scale(0.75);
-        transform: translateY(0%) scale(0.75);
-      }*/
 
 
     </style>
     <div class$="{{focusclass}} total">
       <label class="label">[[label]]</label>
-      <input is="iron-input" bind-value="{{inputvalue}}">
+      <input is="iron-input" bind-value="{{inputvalue}}" placeholder$="[[placeholder]]">
     </div>
   </template>
 
@@ -174,9 +139,9 @@ Example:
 
       _inputvalue: function (){
         if (this.inputvalue != ''){
-          console.log('Er is al iet getyperd');
+
         } else {
-          console.log('Er is nog niks getyperd');
+
         }
       },
 
@@ -201,7 +166,6 @@ Example:
       },
 
       _color: function(){
-        console.log(this.color);
         this.inputcolor = 'var(--locals-'+this.color+')';
         this.customStyle['--input-color'] = this.inputcolor;
         this.updateStyles();
