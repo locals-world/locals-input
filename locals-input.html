@@ -33,8 +33,10 @@ Example:
     <style>
      :host {
         display: block;
-        margin: 20px 0px 20px 0px;
+        margin: 15px 0px 15px 0px;
         --input-color: darkgrey;
+        width: 100%;
+        max-width: 100%;
       }
 
       .total {
@@ -65,15 +67,15 @@ Example:
         border: none;
         z-index: 0;
         box-sizing: border-box;
-        padding: 10px;
-        font-size: 20px;
-        background-color: rgba(0,0,0,0.05);
+        padding: 8px;
+        font-size: 16px;
+        background-color: rgba(0,0,0,0.04);
       }
 
       .outfocus input {
         box-sizing: border-box;
         border: none;
-        background-color: rgba(0,0,0,0.05);
+        background-color: rgba(0,0,0,0.04);
         @apply(--opensans-reg);
       }
 
@@ -98,13 +100,13 @@ Example:
 
       .infocus label {
         color: var(--input-color);
-        @apply(--opensans-semibold);
+        @apply(--opensans-reg);
         -webkit-transition: -webkit-transform 0.15s;
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
-        -webkit-transform: translateY(0%) translateX(5px) scale(1.15);
-        transform: translateY(0%) translateX(5px) scale(1.15);
+        -webkit-transform: translateY(0%) translateX(8px) scale(1.10);
+        transform: translateY(0%) translateX(8px) scale(1.10);
         padding: 5px 5px 0px 0px;
 
       }
