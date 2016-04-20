@@ -33,7 +33,7 @@ Example:
     <style>
      :host {
         display: block;
-        margin: 15px 0px 15px 0px;
+        margin: 5px 0px 0px 0px;
         --input-color: darkgrey;
         width: 100%;
         max-width: 100%;
@@ -51,7 +51,7 @@ Example:
         font-size: 12px;
         z-index: -1;
         box-sizing: border-box;
-        padding: 5px 5px 5px 0px;
+        padding: 5px 5px 0px 0px;
         color:var(--locals-darkgrey);
       }
 
@@ -69,25 +69,31 @@ Example:
         box-sizing: border-box;
         padding: 8px;
         font-size: 16px;
+      }
+
+      .withcontent input {
+        border-bottom: 2px solid rgba(0,0,0,0.075);
+        background-color: rgba(0,0,0,0);
+      }
+
+
+      .nocontent input {
         background-color: rgba(0,0,0,0.04);
       }
 
+
       .outfocus input {
         box-sizing: border-box;
-        border: none;
-        background-color: rgba(0,0,0,0.04);
         @apply(--opensans-reg);
       }
 
       .outfocus label {
-        color:var(--locals-darkgrey);
         -webkit-transition: -webkit-transform 0.15s;
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
         -webkit-transform: translateY(0%) translateX(0px) scale(1);
         transform: translateY(0%) translateX(0px) scale(1);
-        padding: 5px 5px 5px 0px;
       }
 
       .infocus input {
@@ -96,6 +102,7 @@ Example:
         transition: background-color 0.15s;
         background-color: rgba(0,0,0,0);
         @apply(--opensans-semibold);
+        margin-top: 4px;
       }
 
       .infocus label {
@@ -105,15 +112,28 @@ Example:
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
-        -webkit-transform: translateY(0%) translateX(8px) scale(1.10);
-        transform: translateY(0%) translateX(8px) scale(1.10);
+        -webkit-transform: translateY(0%) translateX(8px) scale(1.15);
+        transform: translateY(0%) translateX(8px) scale(1.15);
         padding: 5px 5px 0px 0px;
-
       }
 
 
+      .withcontent label {
+        color: lightgrey;
+      }
+
+
+/*      .nocontent input {
+        background-color: rgba(0,0,0,0.04);
+      }
+
+      .withcontent input {
+        background-color: transparent;
+        border: 2px solid rgba(0,0,0,0.04);
+      }*/
+
     </style>
-    <div class$="{{focusclass}} total">
+    <div class$="{{focusclass}} {{contentclass}} total">
       <label class="label">[[label]]</label>
       <input is="iron-input" bind-value="{{inputvalue}}" placeholder$="[[placeholder]]">
     </div>
@@ -136,23 +156,26 @@ Example:
 
         inputvalue: {
           type: String,
-          value: '',
-          observer: '_inputvalue'
+          value: ''
         }
       },
 
       _inputvalue: function (){
-        if (this.inputvalue != ''){
-
+        if(this.inputvalue){
+          console.log('Er staat wel degelijk iets in!', this.inputvalue);
+          this.contentclass = 'withcontent';
         } else {
-
+          this.contentclass = 'nocontent';
         }
+
       },
 
 
       ready: function() {
         this.addEventListener('focus', this._boundtoFocus, true);
         this.addEventListener('blur', this._boundtoBlur, true);
+          this._inputvalue();
+
       },
 
       attached: function() {
@@ -167,6 +190,7 @@ Example:
 
       _boundtoBlur: function(){
           this.focusclass = 'outfocus';
+          this._inputvalue();
       },
 
       _color: function(){

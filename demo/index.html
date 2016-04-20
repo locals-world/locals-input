@@ -21,17 +21,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       min-width: 300px;
       padding: 50px;
      }
+     .whitespace {
+      height: 20px;
+     }
 
     </style>
   </head>
   <body unresolved>
 
   <div class="presenting">
+  <div class="localstypo">
+  <h1>Input fields</h1>
+  <p>without labels</p>
 
-    <locals-input label="Your favourite DAO" placeholder="A-Labs">
+    <locals-input placeholder="An input without a label"></locals-input>
+    <locals-input placeholder="An input without a label"></locals-input>
+    <locals-input placeholder="An input without a label"></locals-input>
+<div class="whitespace"></div>
+  <p>with labels</p>
+
+    <locals-input label="Favourite DAO" placeholder="A-Labs">
     </locals-input>
 
-    <locals-input label="Your favourite dApp" color="blue" placeholder="Locals, offcourse!">
+    <locals-input label="Favourite dApp" color="blue" placeholder="Locals, offcourse!">
     </locals-input>
 
 
