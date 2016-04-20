@@ -33,20 +33,65 @@ Example:
     <style>
      :host {
         display: block;
+        position: relative;
         box-sizing: border-box;
         @apply(--layout-vertical);
+        @apply(--opensans-light);
+        z-index: 0;
+/*        background-color: rgba(255,0,255,0.025);*/
+
+      }
+
+      .label {
+        z-index: -1;
+      }
+
+      input {
+        @apply(--opensans-light);
+        background-color: rgba(0,0,0,0.025);
+        outline-width: 0;
+        outline: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        border: none;
+        z-index: 0;
+        box-sizing: border-box;
+        padding: 5px;
+        font-size: 22px;
+      }
+
+      .normallabel {
+        font-size: 22px;
+        line-height: 22px;
+        padding: 5px;
+        box-sizing: border-box;
+        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
+        transition: transform 0.25s, width 0.25s;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        -webkit-transform: translateY(100%) scale(1);
+        transform: translateY(100%) scale(1);
+      }
+
+      .transformlabel {
+        font-size: 22px;
+        line-height: 22px;
+        -webkit-transition: -webkit-transform 0.25s, width 0.25s;
+        transition: transform 0.25s, width 0.25s;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        -webkit-transform: translateY(0%) scale(0.75);
+        transform: translateY(0%) scale(0.75);
       }
 
 
     </style>
 
 
-      <label>[[label]]</label>
-      <input is="iron-input" bind-value="{{value}}">
-
-
-  
-
+      <label class$="{{labelclass}} label">[[label]]</label>
+      <input is="iron-input" bind-value="{{inputvalue}}">
   </template>
 
   <script>
@@ -59,6 +104,25 @@ Example:
 
       properties: {
 
+      inputvalue: {
+        type: String,
+        value: '',
+        observer: '_inputvalue'
+      }
+
+
+      },
+
+      _inputvalue: function (){
+        if (this.inputvalue != ''){
+          this.labelclass = 'transformlabel';
+        } else {
+          this.labelclass = 'normallabel';
+        }
+      },
+
+      _labelmagic: function(hasInput){
+        return 'bluelabel';
       },
 
 
