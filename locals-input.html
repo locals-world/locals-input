@@ -33,22 +33,34 @@ Example:
     <style>
      :host {
         display: block;
+        --input-color: darkgrey;
+/*        background-color: rgba(255,0,255,0.025);*/
+
+      }
+
+      .total {
         position: relative;
         box-sizing: border-box;
         @apply(--layout-vertical);
         @apply(--opensans-light);
         z-index: 0;
-/*        background-color: rgba(255,0,255,0.025);*/
-
       }
 
+
+
+
+
       .label {
+        font-size: 12px;
         z-index: -1;
+        box-sizing: border-box;
+        padding: 5px;
       }
 
       input {
-        @apply(--opensans-light);
-        background-color: rgba(0,0,0,0.025);
+        @apply(--opensans-reg);
+        color:var(--locals-darkgrey);
+
         outline-width: 0;
         outline: none;
         -moz-user-select: none;
@@ -58,15 +70,60 @@ Example:
         border: none;
         z-index: 0;
         box-sizing: border-box;
-        padding: 5px;
-        font-size: 22px;
+        padding: 12px;
+        font-size: 20px;
+        background-color: rgba(0,0,0,0.025);
+
       }
 
-      .normallabel {
-        font-size: 22px;
-        line-height: 22px;
-        padding: 5px;
+
+
+      .outfocus input {
         box-sizing: border-box;
+        border: none;
+        background-color: rgba(0,0,0,0.025);
+      }
+
+      .outfocus label {
+        color: black;
+        @apply(--opensans-light);
+
+        -webkit-transition: -webkit-transform 0.15s;
+        transition: transform 0.15s;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        -webkit-transform: translateY(0%) scale(1);
+        transform: translateY(0%) scale(1);
+      }
+
+
+
+
+      .infocus input {
+        box-sizing: border-box;
+        border-bottom: 2px solid var(--input-color);
+        transition: background-color 0.15s;
+        background-color: rgba(0,0,0,0);
+      }
+
+      .infocus label {
+        color: var(--input-color);
+        @apply(--opensans-semibold);
+
+        -webkit-transition: -webkit-transform 0.15s;
+        transition: transform 0.15s;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        -webkit-transform: translateY(0%) scale(1.15);
+        transform: translateY(0%) scale(1.15);
+      }
+
+
+
+
+
+
+/*      .normallabel {
         -webkit-transition: -webkit-transform 0.25s, width 0.25s;
         transition: transform 0.25s, width 0.25s;
         -webkit-transform-origin: left top;
@@ -76,22 +133,21 @@ Example:
       }
 
       .transformlabel {
-        font-size: 22px;
-        line-height: 22px;
+
         -webkit-transition: -webkit-transform 0.25s, width 0.25s;
         transition: transform 0.25s, width 0.25s;
         -webkit-transform-origin: left top;
         transform-origin: left top;
         -webkit-transform: translateY(0%) scale(0.75);
         transform: translateY(0%) scale(0.75);
-      }
+      }*/
 
 
     </style>
-
-
-      <label class$="{{labelclass}} label">[[label]]</label>
+    <div class$="{{focusclass}} total">
+      <label class="label">[[label]]</label>
       <input is="iron-input" bind-value="{{inputvalue}}">
+    </div>
   </template>
 
   <script>
@@ -99,56 +155,56 @@ Example:
       is: 'locals-input',
 
       behaviors: [
-
       ],
 
       properties: {
 
-      inputvalue: {
-        type: String,
-        value: '',
-        observer: '_inputvalue'
-      }
+        color: {
+          type:String,
+          value: 'darkgrey',
+          observer: '_color'
+        },
 
-
+        inputvalue: {
+          type: String,
+          value: '',
+          observer: '_inputvalue'
+        }
       },
 
       _inputvalue: function (){
         if (this.inputvalue != ''){
-          this.labelclass = 'transformlabel';
+          console.log('Er is al iet getyperd');
         } else {
-          this.labelclass = 'normallabel';
+          console.log('Er is nog niks getyperd');
         }
-      },
-
-      _labelmagic: function(hasInput){
-        return 'bluelabel';
       },
 
 
       ready: function() {
-        // `ready` is called after all elements have been configured, but
-        // propagates bottom-up. This element's children are ready, but parents
-        // are not.
-        //
-        // This is the point where you should make modifications to the DOM (when
-        // necessary), or kick off any processes the element wants to perform.
+        this.addEventListener('focus', this._boundtoFocus, true);
+        this.addEventListener('blur', this._boundtoBlur, true);
       },
 
       attached: function() {
-        // `attached` fires once the element and its parents have been inserted
-        // into a document.
-        //
-        // This is a good place to perform any work related to your element's
-        // visual state or active behavior (measuring sizes, beginning animations,
-        // loading resources, etc).
       },
 
       detached: function() {
-        // The analog to `attached`, `detached` fires when the element has been
-        // removed from a document.
-        //
-        // Use this to clean up anything you did in `attached`.
+      },
+
+      _boundtoFocus: function(){
+          this.focusclass = 'infocus';
+      },
+
+      _boundtoBlur: function(){
+          this.focusclass = 'outfocus';
+      },
+
+      _color: function(){
+        console.log(this.color);
+        this.inputcolor = 'var(--locals-'+this.color+')';
+        this.customStyle['--input-color'] = this.inputcolor;
+        this.updateStyles();
       }
 
 
