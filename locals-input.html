@@ -74,11 +74,15 @@ Example:
       .withcontent input {
         border-bottom: 2px solid rgba(0,0,0,0.075);
         background-color: rgba(0,0,0,0);
+        padding: 0px 0px 4px 0px;
       }
 
 
       .nocontent input {
         background-color: rgba(0,0,0,0.04);
+      }
+      .withcontent label {
+        color: lightgrey;
       }
 
 
@@ -86,6 +90,8 @@ Example:
         box-sizing: border-box;
         @apply(--opensans-reg);
       }
+
+
 
       .outfocus label {
         -webkit-transition: -webkit-transform 0.15s;
@@ -103,11 +109,12 @@ Example:
         background-color: rgba(0,0,0,0);
         @apply(--opensans-semibold);
         margin-top: 4px;
-      }
+        padding: 8px;
+     }
 
       .infocus label {
         color: var(--input-color);
-        @apply(--opensans-reg);
+        @apply(--opensans-semibold);
         -webkit-transition: -webkit-transform 0.15s;
         transition: transform 0.15s;
         -webkit-transform-origin: left top;
@@ -118,9 +125,6 @@ Example:
       }
 
 
-      .withcontent label {
-        color: lightgrey;
-      }
 
 
 /*      .nocontent input {
