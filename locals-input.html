@@ -139,7 +139,7 @@ Example:
 
     <div class$="{{focusclass}} {{contentclass}} total">
       <label class="label">[[label]]</label>
-      <input id="inputter" is="iron-input" bind-value="{{inputvalue}}" placeholder$="[[placeholder]]">
+      <input id="inputter" is="iron-input" bind-value="{{inputvalue}}" placeholder$="[[placeholder]]" type="{{type}}">
     </div>
 
 
@@ -175,10 +175,12 @@ Example:
           type: Boolean,
           value: false
         },
-        // type: {
-        //   type: String,
-        //   observer: '_type'
-        // },
+
+        type: {
+          type: String,
+          value: 'text',
+          observer: '_type'
+        },
 
       },
 
@@ -238,27 +240,9 @@ Example:
         this.updateStyles();
       },
 
-      // _type:function(){
-      //   console.log(this.type);
-
-      //     switch (this.type) {
-      //       case 'datepicker':
-      //         console.log("Het is ne datepicker!!");
-      //         this.datepickerinput = true;
-      //         this.txtinput = false;
-      //         break;
-      //       case 'txt':
-      //         console.log("Het is ne txt!!");
-      //         this.datepickerinput = false;
-      //         this.txtinput = true;
-      //         break;
-      //       default:
-      //         console.log("'t Is nen deafult!!");
-      //         this.datepickerinput = false;
-      //         this.txtinput = true;
-      //         break;                          
-      //     }
-      // },
+      _type:function(){
+        console.log(this.type);
+      },
 
 
       _date: function(){
