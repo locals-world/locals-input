@@ -182,6 +182,12 @@ Example:
           observer: '_type'
         },
 
+
+        unixts: {
+          type: Number,
+          notify:true
+        },
+
       },
 
       _inputvalue: function (){
@@ -261,6 +267,7 @@ Example:
                   self.inputvalue = this.getMoment().format('Do MMMM YYYY') + ' ';
                   // var date = document.createTextNode(this.getMoment().format('Do MMMM YYYY') + ' ');
                   // self.$.selected.appendChild(date);
+                  self.unixts = this.getMoment().format('X');
               }
           });          
           // picker.setMoment(moment().dayOfYear(366));
