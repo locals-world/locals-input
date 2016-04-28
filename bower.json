@@ -20,7 +20,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "iron-input": "^1.0.10",
-    "locals-style": "https://github.com/locals-world/locals-elements-style.git",
+    "locals-style": "https://github.com/locals-world/locals-style.git",
     "paper-input": "^1.1.11",
     "pikaday": "https://github.com/dbushell/Pikaday.git#^1.4.0",
     "moment": "https://github.com/moment/moment.git#^2.13.0"

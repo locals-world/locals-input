@@ -10,25 +10,30 @@ LOCALS
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../locals-style/locals-style.html">
 <link rel="import" href="../iron-input/iron-input.html">
-<!-- <link rel="stylesheet" href="../pikaday/css/pikaday.css"> -->
 <link rel="stylesheet" href="locals-input-datepicker.css">
 
-
-<!-- <script src="../moment/moment.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> -->
-
-
 <!--
-Based on the paper-input element, this element uses the same structure but applies Locals-style to it.
+This element uses the same structure as a paper-input but applies Locals-style to it. Use label, placeholder as attribute. Use the attr bind-value for two-way binding your value.
 
 Example:
 
-    <locals-input></locals-input>
+    <locals-input label="My input" placeholder="Just another txtinput">
+    </locals-input>
+
+
+
+Use date for a datepicker-input. 
 
 Example:
 
-    <locals-input>
-      <h2>Hello locals-input</h2>
+    <locals-input date label="My date" placeholder="4th July 2016">
+    </locals-input>
+
+Use "type=time" for a time-input. The unixts give a unix time stamp.
+
+Example:
+
+    <locals-input type="time" label="My time">
     </locals-input>
 
 @demo demo/index.html
