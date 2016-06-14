@@ -53,6 +53,7 @@ Example:
         width: 100%;
         max-width: 100%;
         --txt-align:left;
+        --transform-origin:left top;
       }
 
       .total {
@@ -88,16 +89,16 @@ Example:
         padding: 4px 8px 4px 0px;
         font-size: 16px;
         background-color: transparent;
-        border-bottom: 1px solid var(--locals-grey2);
+        border-bottom: 1px solid rgba(0,0,0,0.3);
         text-align: var(--txt-align);
       }
 
       .nocontent label {
-        color: var(--locals-grey4);
+        color: rgba(0,0,0,0.4);
         -webkit-transition: -webkit-transform 0.25s;
         transition: transform 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
+        -webkit-transform-origin: var(--transform-origin);
+        transform-origin: var(--transform-origin);
         -webkit-transform: translateY(0%) translateX(10px) translateY(20px) scale(1.35);
         transform: translateY(0%) translateX(10px) translateY(20px) scale(1.35);
 
@@ -108,8 +109,8 @@ Example:
         @apply(--opensans-semibold);
         -webkit-transition: -webkit-transform 0.25s;
         transition: transform 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
+        -webkit-transform-origin: var(--transform-origin);
+        transform-origin: var(--transform-origin);
         -webkit-transform: translateY(0%) translateX(0px) scale(1);
         transform: translateY(0%) translateX(0px) scale(1);
       }
@@ -122,8 +123,8 @@ Example:
       .outfocus .nocontent label {
         -webkit-transition: -webkit-transform 0.25s;
         transition: transform 0.25s;
-        -webkit-transform-origin: left top;
-        transform-origin: left top;
+        -webkit-transform-origin: var(--transform-origin);
+        transform-origin: var(--transform-origin);
         -webkit-transform: translateY(0%) translateX(0px) scale(1);
         transform: translateY(0%) translateX(0px) scale(1);
       }
@@ -138,7 +139,7 @@ Example:
       <input id="inputter"
         is="iron-input"
         bind-value="{{inputvalue}}"
-
+        autofocus="[[autofocus]]"
         type="{{type}}"
         name$="[[name]]"
         >
@@ -166,6 +167,10 @@ Example:
           observer: '_inputvalue'
         },
 
+        autofocus: {
+          type: Boolean,
+          value: false
+        },
 
         date: {
           type: Boolean,
@@ -261,8 +266,11 @@ Example:
       _center: function(){
         if(this.center){
         this.customStyle['--txt-align'] = 'center';
+        this.customStyle['--transform-origin'] = 'center top';
         } else {
         this.customStyle['--txt-align'] = 'left';
+        this.customStyle['--transform-origin'] = 'left top';
+
         }
         this.updateStyles();
 
